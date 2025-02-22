@@ -6,22 +6,10 @@ const Navbar = () => {
   const location = useLocation();
   const LocalStorageName = localStorage.getItem("userName");
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const [rerender, setRerender] = useState(false);
 
   const handleToggleNavbar = () => {
     setNavbarOpen(!navbarOpen);
   };
-
-  const handleLogout = () => {
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userToken");
-    setRerender((rerender) => !rerender);
-  };
-
-  // Scroll to top when navigating to any link
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow-sm fixed-top">
@@ -49,16 +37,14 @@ const Navbar = () => {
           <ul className="navbar-nav mb-2 mb-lg-0">
             {[
               { to: "/home", label: "Home" },
-              { to: "/brands", label: "Brands" },
-              { to: "/allproducts", label: "Products" },
-              { to: "/wishlist", label: "Wishlist" },
-              { to: "/cart", label: "Cart" },
+              { to: "/home", label: "Brands" },
+              { to: "/home", label: "Products" },
+              { to: "/home", label: "Wishlist" },
+              { to: "/home", label: "Cart" },
             ].map((link) => (
               <li
                 key={link.to}
-                className={`nav-item ${
-                  location.pathname === link.to ? "active" : ""
-                } ps-2`}
+                className={`nav-item  ps-2`}
                 onClick={handleToggleNavbar}
               >
                 <Link className="nav-link" to={link.to}>
@@ -103,7 +89,7 @@ const Navbar = () => {
                     }`}
                     onClick={handleToggleNavbar}
                   >
-                    <Link className="nav-link me-3" to="/login">
+                    <Link className="nav-link me-3" to="/home">
                       Login
                     </Link>
                   </li>
@@ -113,7 +99,7 @@ const Navbar = () => {
                     }`}
                     onClick={handleToggleNavbar}
                   >
-                    <Link className="nav-link" to="/register">
+                    <Link className="nav-link" to="/home">
                       Register
                     </Link>
                   </li>
